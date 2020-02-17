@@ -222,6 +222,14 @@ As part of this review, the following capabilities have been removed:
 * The functionality to export back-end APIs converts all API formats to Swagger 1. With the introduction of OAS3, API Manager uses the `io.swagger.parser.v3.swagger-parser-v3:2.0.16` and `io.swagger.swagger-parser:1.0.48` libraries during the import process. This means that the export of back-end APIs is not supported for OAS3 or WSDL APIs, as this functionality relied on custom code in the old parser that is no longer available.
 * Documentation is no longer provided in PDF format. You can continue to save individual topics or entire guides in PDF format using the **Save as PDF** icon on the [Axway documentation portal](https://docs.axway.com/).
 
+* Write a custom filter using the extension kit
+The following interfaces are now deprecated '_()' and '__()' in favor of new 'resolve()' :
+- com.vordel.client.manager.ResourceResolver
+- com.vordel.client.manager.attr.ScreenAttribute
+- com.vordel.client.manager.wizard.EntityContext
+Both DefaultGUIFilter and VordelWizard classes missed to implement ResourceResolver interface. 
+As a result, any classes extending either one need to replace '_()' and '__()' method calls to resolve().
+
 ## Fixed issues
 
 <!-- Fixed issues are maintained in another topic -->
@@ -266,7 +274,9 @@ The following are known issues for this release.
 | RDAPI-18774 | Nested   relative path behavior changed, causing customer policies to fail                                                                                               |
 | RDAPI-18776 | regex   for custom property in API Manager                                                                                                                               |
 | RDAPI-18812 | DB   definition with wildcard password fails in Resource Owner Password Credential   filter                                                                              |
-| RDAPI-18876 | Extremely   slow Swagger virtualization when Cassandra is under load                                                                                                     |
+| RDAPI-18876 | Extremely slow Swagger virtualization when Cassandra is under load                                                                                                     |
+
+(1 liked)
 
 ## Update a classic (non-container) deployment
 
