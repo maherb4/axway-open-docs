@@ -22,7 +22,7 @@ API Manager now enables user membership to multiple organizations. User accounts
 
 The multi-org feature is available with the 1.4 version of the API only, meaning that any 3rd party portals or integrations (such as SSO) will need to be updated to use the 1.4 version of API in order to avail of the multi org functionality. The API Manager UI uses the 1.4 version of the API by default. This feature is forward compatible (so 1.4 version of the APIs will work with single org users) but not backward compatible (if you configure multi orgs in the 1.4 version of the API and then revert to the 1.3 version of the API; this isn't supported). The new 1.4 version of the API is available in OAS3 format on our [Swagger UI page ](https://docs.axway.com/category/api)
 
-#### Managing Users 
+#### Managing Users
 
 In order to facility the creation and maintenance of multi org users in API Manager several changes need to take place. 
 
@@ -30,15 +30,17 @@ Firstly, the APIAdmin can now assign a user to more than 1 org via the [User API
 
 Secondly, the orgAdmin's ability to manage users within its org has changed to avoid privileged escalation concerns. OrgAdmins can't edit or delete multi-org users if that user is a member of an org that the OrgAdmin doesn't have access too, otherwise the OrgAdmin could inadvertently effect an organization that they son't have access too. Details in relation to these restrictions are outlined [here](https://axway-open-docs.netlify.app/docs/api_mgmt_overview/key_concepts/api_mgmt_orgs_roles/#organizations-and-user-roles-in-api-manager)
 
-Finally, SSO integration has had to change to facilitate configuring users from an external IDP to multi orgs. The in order to assign a user to multi orgs
+Finally, SSO integration has had to change to facilitate configuring users from an external IDP to multi orgs. The in order to assign a user to multi orgs a new 'orgs2role' attribute was created. This attribute can be populated via: 
 
-Account Changes 
+1. A direct attribute in the IDP 
+2. A LDAP mapping in the service-provider.xml file 
+3. A filter configured in Policy Studio which allows the orgs2role map value to be overwritten
 
+For more information on configuring multi org users see [Configure API Manager Single Sign On](https://axway-open-docs.netlify.app/docs/apim_administration/apimgr_sso/saml_sso_config/)
 
+#### Account Changes
 
-When you delete an organization, its associated applications are also deleted.
-
-When you delete the primary organization of a user, the user’s account is also deleted; otherwise, only the membership of the user with the deleted organization is removed. For details on managing organizations, see [Manage organizations](/docs/apim_administration/apimgr_admin/api_mgmt_admin/#manage-organizations).
+When an account is configure to be a member of multi orgs they are automatically authenticated and brought to their primary organisation (the first organisation in their membership list). Using the drop down menu provided users can navigate between their organisations. As they move between organisations the UI will react to the role the user has in each org, only presenting the options available to that user in a particular org based on their role (either orgAdmin or User).
 
 <!-- Add the new features here -->
 
