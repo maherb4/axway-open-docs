@@ -16,7 +16,25 @@ Docker deployment is supported on Linux. For a summary of the system requirement
 
 ### Users membership to multiple organizations
 
-API Manager enables user membership to multiple organizations with different roles for each organization the user is a member of. For details on managing users, see [Manage users](/docs/apim_administration/apimgr_admin/api_mgmt_admin/#manage-users).
+API Manager now enables user membership to multiple organizations. User accounts can now have different roles in each organization the user is a member of. There are a number of important changes that have been implemented in this release to enable this:
+
+#### API Version Update
+
+The multi-org feature is available with the 1.4 version of the API only, meaning that any 3rd party portals or integrations (such as SSO) will need to be updated to use the 1.4 version of API in order to avail of the multi org functionality. The API Manager UI uses the 1.4 version of the API by default. This feature is forward compatible (so 1.4 version of the APIs will work with single org users) but not backward compatible (if you configure multi orgs in the 1.4 version of the API and then revert to the 1.3 version of the API; this isn't supported). The new 1.4 version of the API is available in OAS3 format on our [Swagger UI page ](https://docs.axway.com/category/api)
+
+#### Managing Users 
+
+In order to facility the creation and maintenance of multi org users in API Manager several changes need to take place. 
+
+Firstly, the APIAdmin can now assign a user to more than 1 org via the [User API](http://apidocs.axway.com/swagger-ui-NEW/index.html?productname=apimanager&productversion=7.7.0&filename=api-manager-V_1_4-oas3.json#/Users) and via the Application Developer's Create and Edit Users screens. For details on managing users, see [Manage users](/docs/apim_administration/apimgr_admin/api_mgmt_admin/#manage-users).
+
+Secondly, the orgAdmin's ability to manage users within its org has changed to avoid privileged escalation concerns. OrgAdmins can't edit or delete multi-org users if that user is a member of an org that the OrgAdmin doesn't have access too, otherwise the OrgAdmin could inadvertently effect an organization that they son't have access too. Details in relation to these restrictions are outlined [here](https://axway-open-docs.netlify.app/docs/api_mgmt_overview/key_concepts/api_mgmt_orgs_roles/#organizations-and-user-roles-in-api-manager)
+
+Finally, SSO integration has had to change to facilitate configuring users from an external IDP to multi orgs. The in order to assign a user to multi orgs
+
+Account Changes 
+
+
 
 When you delete an organization, its associated applications are also deleted.
 
@@ -56,7 +74,7 @@ The list of removed broken and risky algorithms is:
 * **Ciphers**: `arcfour256`, `arcfour128`, `aes128-cbc`, `3des-cbc`, `blowfish-cbc`, `aes192-cbc`, `aes256-cbc`
 * **Mac Algorithms**: `hmac-md5`, `hmac-sha1`, `hmac-sha1-96`, `hmac-md5-96`
 * **Key exchange**: `diffie-hellman-group-exchange-sha1`, `diffie-hellman-group18-sha512`, `diffie-hellman-group17-sha512`, `diffie-hellman-group16-sha512`,
-`diffie-hellman-group15-sha512`, `diffie-hellman-group14-sha256`, `diffie-hellman-group14-sha1`, `diffie-hellman-group1-sha1`
+  `diffie-hellman-group15-sha512`, `diffie-hellman-group14-sha256`, `diffie-hellman-group14-sha1`, `diffie-hellman-group1-sha1`
 
 The sFTP server currently supports:
 
@@ -115,9 +133,9 @@ This version of API Gateway and API Manager includes:
 
 <!-- Add  here -->
 
-| Internal ID | Case ID | Cve Identifier | Description                                                                 |
-| ----------- | ------- | ------- |--------------------------------------------------------------------------- |
-|RDAPI-20951||CVE-2020-14621 CVE-2020-14556 CVE-2019-17359|**Issue**:  API Gateway included Zulu OpenJDK v8u242, which has a number of vulnerabilities including CVE-2020-14621. API Gateway included Bouncy Castle library version 1.60 which contained CVE-2019-17359 vulnerability. **Resolution**: API Gateway now includes Zulu OpenJDK v8u265 and Bouncy Castle library version 1.66 and is no longer vulnerable.|
+| Internal ID | Case ID | Cve Identifier                               | Description                                                                                                                                                                                                                                                                                                                                                  |
+| ----------- | ------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RDAPI-20951 |         | CVE-2020-14621 CVE-2020-14556 CVE-2019-17359 | **Issue**:  API Gateway included Zulu OpenJDK v8u242, which has a number of vulnerabilities including CVE-2020-14621. API Gateway included Bouncy Castle library version 1.60 which contained CVE-2019-17359 vulnerability. **Resolution**: API Gateway now includes Zulu OpenJDK v8u265 and Bouncy Castle library version 1.66 and is no longer vulnerable. |
 
 ### Other fixed issues
 
