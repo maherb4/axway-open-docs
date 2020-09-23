@@ -42,6 +42,14 @@ For more information on configuring multi org users see [Configure API Manager S
 
 When an account is configure to be a member of multi orgs they are automatically authenticated and brought to their primary organisation (the first organisation in their membership list). Using the drop down menu provided users can navigate between their organisations. As they move between organisations the UI will react to the role the user has in each org, only presenting the options available to that user in a particular org based on their role (either orgAdmin or User).
 
+## Organization Admins Can Publish APIs
+
+As part of this release we've begun to tackle our next big topic User Self Service. In this release the OrgAdmin can be configured to Publish and Unpublish an API which was created in their organisation without approval from an API Admin.
+
+By default, organization administrators require an administrator's approval to publish and unpublish APIs owned by users in their organization. By setting *api.manager.orgadmin.selfservice.enabled* system property to *true*, the organization administrator will no longer require approval and will be able to directly publish and unpublish.
+
+
+
 <!-- Add the new features here -->
 
 ## Important changes
