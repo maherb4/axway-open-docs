@@ -14,43 +14,43 @@ Docker deployment is supported on Linux. For a summary of the system requirement
 
 ## New features and enhancements
 
+The following new features and enhancements are available in this update.
+
 ### Users membership to multiple organizations
 
-API Manager now enables user membership to multiple organizations. User accounts can now have different roles in each organization the user is a member of. There are a number of important changes that have been implemented in this release to enable this:
+API Manager now enables creating membership to users with multiple organizations (multi-orgs). User accounts can have different roles in each organization the user is a member of. The following are some important changes implemented to enable this new feature.
 
-#### API Version Update
+#### API version update
 
-The multi-org feature is available with the 1.4 version of the API only, meaning that any 3rd party portals or integrations (such as SSO) will need to be updated to use the 1.4 version of API in order to avail of the multi org functionality. The API Manager UI uses the 1.4 version of the API by default. This feature is forward compatible (so 1.4 version of the APIs will work with single org users) but not backward compatible (if you configure multi orgs in the 1.4 version of the API and then revert to the 1.3 version of the API; this isn't supported). The new 1.4 version of the API is available in OAS3 format on our [Swagger UI page ](https://docs.axway.com/category/api)
+The multi-orgs feature is available with the API version 1.4 only, meaning that any third-party portals or integrations (for example, SSO) must be updated to use the API 1.4 to avail of the multi-orgs functionality.
 
-#### Managing Users
+This feature is forward compatible, the API 1.4 will work with single-org users, but not backward compatible, you cannot configure multi-orgs in the API 1.4, then revert it to the API 1.3.
 
-In order to facility the creation and maintenance of multi org users in API Manager several changes need to take place. 
+The new **API Manager 7.7 API 1.4** is available in OAS3 format on the [Axway Documentation portal](https://docs.axway.com/category/api). API Manager UI uses the API 1.4 by default.
 
-Firstly, the APIAdmin can now assign a user to more than 1 org via the [User API](http://apidocs.axway.com/swagger-ui-NEW/index.html?productname=apimanager&productversion=7.7.0&filename=api-manager-V_1_4-oas3.json#/Users) and via the Application Developer's Create and Edit Users screens. For details on managing users, see [Manage users](/docs/apim_administration/apimgr_admin/api_mgmt_admin/#manage-users).
+#### Managing multi-orgs users
 
-Secondly, the orgAdmin's ability to manage users within its org has changed to avoid privileged escalation concerns. OrgAdmins can't edit or delete multi-org users if that user is a member of an org that the OrgAdmin doesn't have access too, otherwise the OrgAdmin could inadvertently effect an organization that they son't have access too. Details in relation to these restrictions are outlined [here](https://axway-open-docs.netlify.app/docs/api_mgmt_overview/key_concepts/api_mgmt_orgs_roles/#organizations-and-user-roles-in-api-manager)
+The following are new changes implemented to facilitate the creation and maintenance of multi-orgs users in API Manager:
 
-Finally, SSO integration has had to change to facilitate configuring users from an external IDP to multi orgs. The in order to assign a user to multi orgs a new 'orgs2role' attribute was created. This attribute can be populated via: 
+* The API Administrator can now assign a user to more than one organization using the [User API](http://apidocs.axway.com/swagger-ui-NEW/index.html?productname=apimanager&productversion=7.7.0&filename=api-manager-V_1_4-oas3.json#/Users) or the Application Developer's **Create** and **Edit** user interface. For more information, see [Manage users](/docs/apim_administration/apimgr_admin/api_mgmt_admin/#manage-users).
 
-1. A direct attribute in the IDP 
-2. A LDAP mapping in the service-provider.xml file 
-3. A filter configured in Policy Studio which allows the orgs2role map value to be overwritten
+* The ability for the Organization Administrator to manage users within its own organization has changed to avoid privileged escalation concerns. OrgAdmins can only edit or delete multi-orgs users from organizations where they are OrgAdmins. To learn more about these restrictions, see [Organizations and user roles in API Manager](/docs/api_mgmt_overview/key_concepts/api_mgmt_orgs_roles/#organizations-and-user-roles-in-api-manager).
 
-For more information on configuring multi org users see [Configure API Manager Single Sign On](https://axway-open-docs.netlify.app/docs/apim_administration/apimgr_sso/saml_sso_config/)
+* Integration via SSO has changed to facilitate configuring users from an external IDP to multi-orgs. You can use the new attribute, `orgs2role`, to assign a user to multi-orgs. This attribute can be populated via:
 
-#### Account Changes
+    * A direct attribute in the IDP.
+    * An LDAP mapping in the service-provider.xml file.
+    * A filter configured in Policy Studio, which allows to overwrite the `orgs2role` map value.
 
-When an account is configure to be a member of multi orgs they are automatically authenticated and brought to their primary organisation (the first organisation in their membership list). Using the drop down menu provided users can navigate between their organisations. As they move between organisations the UI will react to the role the user has in each org, only presenting the options available to that user in a particular org based on their role (either orgAdmin or User).
+For more information on configuring multi-orgs users, see [Configure API Manager Single Sign On](/docs/apim_administration/apimgr_sso/saml_sso_config/).
 
-## Organization Admins Can Publish APIs
+#### Account changes
 
-As part of this release we've begun to tackle our next big topic User Self Service. In this release the OrgAdmin can be configured to Publish and Unpublish an API which was created in their organisation without approval from an API Admin.
+When a user account is configured to be a member of multi-orgs, it is automatically authenticated and associated with its primary organization, the first organization in their membership list. Using the drop-down menu, users can navigate between their organizations and the UI will display the options based on their role, which can be either `orgAdmin` or `User`.
 
-By default, organization administrators require an administrator's approval to publish and unpublish APIs owned by users in their organization. By setting *api.manager.orgadmin.selfservice.enabled* system property to *true*, the organization administrator will no longer require approval and will be able to directly publish and unpublish.
+#### Organization administrators can publish APIs
 
-
-
-<!-- Add the new features here -->
+By default, Organization administrators require the approval of an API administrator to publish and unpublish APIs that were created in their organization without approval from an API Administrator. By setting the `api.manager.orgadmin.selfservice.enabled` system property to `true`, the OrgAdmin will no longer require approval, and will be able to directly publish and unpublish APIs.
 
 ## Important changes
 
