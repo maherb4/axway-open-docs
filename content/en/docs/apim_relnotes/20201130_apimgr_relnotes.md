@@ -89,11 +89,9 @@ We are working to rectify this issue in a future update. In the meantime, you ca
 
 ## Update a classic (non-container) deployment
 
-{{% alert title="note" color="warning" %}}
-Shouldn't this section be remove, or say 'To update your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/)'  ??
+To update your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/)
+To upgrade from an older version of the project, see [Upgrade from API Gateway 7.5.x or 7.6.x](/docs/apim_installation/apigw_upgrade/upgrade_steps_extcass/)
 
-If you want the text back, you can get it from Sep20 RN
-{{% /alert %}}
 
 ## Update a container deployment
 
