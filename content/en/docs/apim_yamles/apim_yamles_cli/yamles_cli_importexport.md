@@ -47,7 +47,7 @@ cutBranchIfPresent:
 - /Policies/Policy Library/WS-Policy/Test Timestamp is Absent
 ```
 
-### How the _fragment.yaml file is used to export
+### Use the _fragment.yaml file to export
 
 The `export` option uses the `_fragment.yaml` file passed in the `--export-descriptor` parameter to determine what data to export from the source configuration.
 
@@ -78,7 +78,7 @@ The `EXPORT_TRUNKS` flag ensures that all parent entities of the selected entiti
 
 The `cutBranchIfPresent` field is not used during export, but it can be set at export time to control what entities might get removed when the fragment is imported.
 
-### How the _fragment.yaml file is used to import
+### Use the _fragment.yaml file to import
 
 A source configuration gets imported into a target configuration. The `META-INF/_fragment.yaml` file in the source configuration is optional for import. If it does not exist, all entities in the source are added to the target configuration only if they do not already exist in the target. This is equivalent to having YamlPKs for all entities listed in the `addIfAbsent` field.
 
