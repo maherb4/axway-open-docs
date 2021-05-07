@@ -105,6 +105,10 @@ The `update_apigw.sh` script generates a trace file in the `update-output/trace`
 
 The script takes a backup of your entire API Gateway installation directory and places it in a `tar` file in the `update-output/backups` directory. Specify a different directory using the `--backup_dir` option. To manage your own backups, use the `--no_backup` option.
 
+### Complete zero downtime update steps (Optional)
+
+If you were using zero downtime update (ZDU), you must discard the old keyspace in cqlsh now. For more information see, [Update the name of the target keyspace](#update-the-name-of-the-target-keyspace)
+
 ## Install a Policy Studio update
 
 You can run the `update_policy_studio.sh` script, which is available from API Gateway One Version Policy Studio update pack (for example, `APIGateway_7.7.YYYYMMDD_PolicyStudio_linux-x86-64_BNnn.tar.gz`) to update your existing Policy Studio installation.
@@ -285,3 +289,133 @@ To revert to the weaker cipher algorithm, you can use the `setMode` method, such
       cipher = PasswordCipher("ThisIsAPassword!123".toCharArray())
       cipher.setMode(PasswordCipher.Mode.SHA1_3DES)
    ```
+
+## Zero downtime update
+
+This section describes any steps or considerations to account for a zero downtime update (ZDU).
+
+To easily accomplish a zero downtime update, you can set up your API Gateway in a different environment. After this environment is fully configured and the data has been migrated to it, promote this environment to production.
+
+### Cassandra schema ZDU
+
+When there is a change in the Cassandra schema in API Manager, you must take a special precaution to allow a zero downtime update, because Cassandra schema changes cause API Manager instances, which are not yet upgraded, to no longer perform read or write to the changed tables.
+
+The `clone-cassandra-keyspace.sh` script clones the keyspace, so that two versions of the keyspace can exist during the upgrade process. The original keyspace allows API Gateway nodes, which have not been updated, to still serve requests, and the cloned keyspace is used for API Gateway nodes, which have been updated.
+
+The keyspace schema is updated after the first API Gateway node is updated. If there is no change to the keyspace schema in your update, then you do not need to clone the keyspace.
+
+You must copy the script, which is located in `INSTALL_DIR/apigateway/tools/clone-cassandra-keyspace.sh`, to one Cassandra node, then run the script.
+
+#### Prerequisites
+
+* Ensure that you create a [full backup of Cassandra data](/docs/cass_admin/cassandra_bur/) and archive it before attempting to duplicate the keyspace.
+* Ensure that there is enough space on disk to duplicate the keyspace data. The size of disk space needed is approximately the same as the space taken up by `cassandra/data/data/$KEYSPACE_NAME`.
+* The maximum number of rows in any table is 2 million rows.
+* After the keyspace is duplicated, new data written in the original keyspace will not be rewritten into the new keyspace. Therefore, we recommend you to restrict any changes to the Cassandra data during the ZDU process.
+* Do not make any changes to users and APIs during the update process.
+* You must disable API Portal during the update process.
+* The keyspace name must be environmentalized within the API Gateway configuration.
+
+    ![Getting Started - sample User data in KPS browser](/Images/UpgradeGuide/upgrade_environmentalized_keyspace.png)
+
+{{< alert title="Caution" color="warning" >}}
+If OAuth tokens are being using to access protected resources, it is important to note that during the update process:
+
+* An updated API Gateway, configured to point to the new cloned keyspace (new schema), will not be able to access any newly generated tokens stored in the original keyspace.
+* An API Gateway that has not yet been updated, and is still configured to use the original keyspace, will not be able to access any newly generated tokens stored in the new cloned keyspace.
+
+Therefore, you must ensure that load balancer settings are configured to allow OAuth traffic through the appropriate API Gateway with access to the correct OAuth tokens.
+{{< /alert >}}
+
+#### Configure cqlsh
+
+To start configuring your new API Gateway environment, add the following to the `cassandra/conf/cqlshrc.sample` file to set up authentication, SSL trust, and CSV file parameters.
+
+```
+[authentication]
+;; If Cassandra has auth enabled, fill out these options
+username = cassandra
+password = cassandra
+; keyspace = ks1
+...
+[ssl]
+certfile = ~/.cassandra/cassandra-ca.pem
+...
+[csv]
+;; The size limit for parsed fields
+; default: field_size_limit = 131072
+; size limit is 10 MB
+field_size_limit = 10485760
+...
+```
+
+#### Configure the clone keyspace script
+
+You must update the following variables within the `clone-cassandra-keyspace.sh` script to suit your environment:
+
+| Name | Description |
+|------|-------------|
+|cqlsh|Location of cqlsh utility|
+|sourceCassClusterHost|Hostname of the source cluster|
+|sourceCassClusterPort|Port of the source cluster|
+|sourceCassClusterUsr|Username of the source cluster|
+|sourceCassClusterPwd|Password of the source cluster|
+|targetCassClusterHost|Hostname of the target cluster|
+|targetCassClusterPort|Port of the target cluster|
+|targetCassClusterUsr|Username of the target cluster|
+|targetCassClusterPwd|Password of the target cluster|
+|apimSourceKeyspace|Name of the source keyspace|
+|apimTargetKeyspace|Name of the target keyspace|
+
+#### Clone the keyspace
+
+Follow these steps to clone the keyspace:
+
+1. Log in to one of the nodes in the source cluster.
+2. Run `nodetool status` to check the status of the node. Ensure all nodes in the cluster are up and normal.
+3. Copy the cloning script to the Cassandra node.
+4. Review the restrictions, ensuring you are ready to run the script.
+5. Run the script `./clone-cassandra-keyspace.sh` to clone the keyspace.
+6. In case of any warnings or errors, check the logs.
+
+The keyspace should now be cloned.
+
+#### Update the name of the target keyspace
+
+This newly cloned keyspace is the keyspace that the upgraded nodes will use to upgrade the schema. Before upgrading an API Gateway node, change its `INSTALL_DIR/apigateway/groups/group-x/instance-y/envSettings.props` to reflect the cloned target keyspace name. The following example, sets the the name as `apim_zdu_test`.
+
+```
+env.CASSANDRA.KEYSPACE=apim_zdu_test
+```
+
+After this is complete, follow the instructions to [Install an API Gateway server update](#install-an-api-gateway-server-update).
+
+After the update is fully installed on all API Gateway nodes, discard the old keyspace in cqlsh.
+
+```
+cqlsh -e "DROP KEYSPACE old_keyspace_name"
+```
+
+### Zero Downtime Update Example Flow
+
+The following is an example a topology might use in order to acheive a zero downtime update.
+
+{{< alert title="Note" color="primary" >}}If not already done, environmentalize the keyspace name in the API Gateway configuration, such that you can configure it on a per server basis. See [Configure environment variables](/docs/apigtw_devops/promotion_arch/#configure-environment-variables){{< /alert >}}
+
+Given a sample topology of:
+
+* 2 API Gateway nodes
+* 3 Cassandra nodes in a single cluster
+* A load balancer
+
+The follow steps would achieve a zero downtime update:
+
+1. Execute the steps to [Clone the keyspace](#clone-the-keyspace).
+2. Configure the load balancer to only send traffic to API Gateway node 2.
+3. Update envSettings.props for API Gateway node 1 such that the keyspace used is the newly cloned keyspace.
+4. [Install an API Gateway server update](#install-an-api-gateway-server-update) on API Gateway node 1. At this point, the cloned keyspace will be upgraded to the new schema.
+5. Configure the load balancer to only send traffic to API Gateway node 1.
+6. Update envSettings.props for API Gateway node 2 such that the keyspace used is the newly cloned keyspace.
+7. [Install an API Gateway server update](#install-an-api-gateway-server-update) on API Gateway node 2.
+8. Configure the load balancer to use all API Gateway nodes.
+9. Once everything is validated to be up and running, drop the original keyspace.
