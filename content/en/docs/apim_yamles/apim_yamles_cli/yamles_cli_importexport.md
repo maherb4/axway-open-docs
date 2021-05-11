@@ -154,6 +154,8 @@ If either the source or target configuration is encrypted with a non-default pas
 
 To check the passphrase, an ESConfiguration entity must exist in the configuration. If a passphrase check cannot be performed, a warning is shown on stdout. If passphrase checks cannot be done and your configurations contains encrypted data, you must ensure the passphrases for the source and target configurations are correct so that the sensitive data can be decrypted successfully from the resulting target configuration. The target configuration passphrase is used for the updated target configuration that contains the merged configuration.
 
+If a source configuration contains `{{file "..." }}` placeholders pointing to an absolute file, an error might occur at load-time if those files are not present in the system running the CLI. To import these types of configurations, use must the `--allow-unresolved-absolute-files` parameter instead.
+
 When using [Team development in Policy Studio](/docs/apigtw_devops/team_dev_practices/#enable-team-development-in-policy-studio) or when your configuration is fragmented into smaller pieces, it is very likely that you import incomplete, invalid stores into a main store. To workaround these validation issues, you can set two flags with `yamles import`:
 
 * Set `--allow-invalid-ref` if some references can only be resolved in the main store.
@@ -161,7 +163,7 @@ When using [Team development in Policy Studio](/docs/apigtw_devops/team_dev_prac
 
 This is to mitigate some legacy small inconsistencies in some entity types. The YAML Entity Store is a little more strict than the Federated Store when an entity gets updated.
 
-The following are examples show you how you can use the `import` option in the `yamles` CLI to import a YAML configuration into another YAML configuration.
+The following are examples of how you can use the `import` option in the `yamles` CLI to import a YAML configuration into another YAML configuration.
 
 **Example 1**: Specify the YAML configuration directory names:
 
@@ -197,6 +199,12 @@ The following are examples show you how you can use the `import` option in the `
 
 ```
 ./yamles import --source /home/user/app-part-1 --target /home/user/yaml-main-config --allow-invalid-ref --allow-invalid-cardinality
+```
+
+**Example 7**: Importing a source YAML configuration containing externalized files pointing to absolute files not present on the system:
+
+```
+./yamles import --source /home/user/yaml-source.tar.gz --target /home/user/yaml-target.tar.gz --allow-unresolved-absolute-files
 ```
 
 You can run the following help command for more details on each parameter:
