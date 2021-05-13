@@ -41,9 +41,13 @@ See the [September 2020](/docs/apim_relnotes/20200930_apimgr_relnotes/#yaml-conf
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update.
 
-### Important changes placeholder
+### Embedded ActiveMQ host name verification
 
-placeholder
+Host name verification was introduced to alleviate a potential CWE-933 security risk, and it is enabled by default on the Embedded ActiveMQ cluster of new API Gateway installations, which choose to use Embedded Active MQ with SSL enabled.
+
+Host name verification is not enabled for upgrading customers, who use Embedded Active MQ with SSL enabled, because this causes their JMS queues to be unable to service requests. However, enabling host name verification when using SSL is a more secure option and should be considered as part of the upgrade.
+
+Enabling host name verification requires a certificate update. For more information, see [Embedded ActiveMQ settings in Policy Studio](/docs/apim_reference/general_activemq_settings/).
 
 ## Deprecated features
 
@@ -74,7 +78,9 @@ This version of API Gateway and API Manager includes:
 
 ### Fixed security vulnerabilities
 
-table
+| Internal ID | Case ID            | Cve Identifier                               | Description      |
+| ----------- | ------------------ | -------------------------------------------- | ---              |
+|RDAPI-21747|||**Issue**: TLS host name verification is not configurable and cannot be enabled for Embedded ActiveMQ. **Resolution**: TLS host name verification is now configurable, and it is enabled by default.|
 
 ### Other fixed issues
 
