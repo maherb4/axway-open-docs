@@ -3,9 +3,10 @@ title: API Gateway and API Manager 7.7 May 2021 Release Notes
 linkTitle: API Gateway and API Manager May 2021
 weight: 95
 date: 2021-04-26
-description: API Gateway and API Manager updates are cumulative, comprising new features and changes delivered in previous updates unless specifically indicated otherwise in the Release notes.
+description: API Gateway and API Manager updates are cumulative, comprising new
+  features and changes delivered in previous updates unless specifically
+  indicated otherwise in the Release notes.
 ---
-
 ## Installation
 
 * To **update** your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/).
@@ -21,9 +22,9 @@ Any custom `.fed` files deployed to a container must be upgraded using [upgradec
 
 The following new features and enhancements are available in this update.
 
-### placeholder
+### Dependency view and revoke access to front-end APIs
 
-placeholder
+API Manager allows Organization Administrators and API Administrators to grant access to their APIs within any organization. Now, you can also view the usage of APIs, where access has been granted to organizations and their applications, as well as revoking their access. For more information, see [Manage API access](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/#manage-api-access).
 
 ### YAML configuration store (Technical preview capability)
 
@@ -90,97 +91,97 @@ table
 
 The following are known issues for this update.
 
-| Internal ID | Description  |
-| ----------- | ----         |
-|RDAPI-16486|Changes in the mapper always require a reload in the Execute Data Maps filter and once reloaded then providing values for the required parameters must be repeated|
-|RDAPI-17282|Connector for Salesforce APIs in API Manager doesn't work or is impossible to configure|
-|RDAPI-17395|APIGW Analytics - no data in DB during DB unavailability|
-|RDAPI-18332|"Try-it" for API-Method is not working|
-|RDAPI-18523|Inconsistent application search behaviour relating to application sharing|
-|RDAPI-18601|EMT environmentalisation issue|
-|RDAPI-18986|projpack is unable to merge projects after projupgrade; likely due to Default APIManager policies|
-|RDAPI-18990|"Failed to delete undefined" window pops up unexpectedly when attempting to delete application|
-|RDAPI-19217|Inconsistency between Application Developers and Account Settings pages in Manager|
-|RDAPI-19292|When an APIM admin user's login name is changed, the user is directed to a blank page|
-|RDAPI-19293|API Catalog Try It shows only the first security device of a security profile|
-|RDAPI-19334|Access to retired APIs is not removed from other organizations as expected|
-|RDAPI-19436|API approve/enable functionality for an organization does not show on application view|
-|RDAPI-19442|Saving Mode Stuck for the Application Creation in different session|
-|RDAPI-19601|Sharing section of Application issue when Organization of application changed|
-|RDAPI-19742|API metrics ignore an API's organization|
-|RDAPI-19743|API Broker not shown in circuit path on all failures|
-|RDAPI-20527|xml2json filter, unable to use xml with valid namespace syntax|
-|RDAPI-20593|Issue with Authentication profiles related to permethod override|
-|RDAPI-20594|When a token is revoked with an incorrect Authorization header, the response is 400 instead of 401|
-|RDAPI-20726|How to get attribute value for apimgmt.application.id|
-|RDAPI-20742|Inconsistent deletion of Environmentalized Settings|
-|RDAPI-20952|NullPointerException when opening a project with dependencies|
-|RDAPI-21009|Issue after updating API Manager settings through rest api if lockUserAccount is missing|
-|RDAPI-21061|updated error message, OAS3 file import without servers section url|
-|RDAPI-21171|Minor UI issue affecting pagination in API keys and Oauth client credentials|
-|RDAPI-21188|AWS SQS Poller does not seem to pass SQS Attributes|
-|RDAPI-21211|APIM doesn't support SOAP 1.1 Binding for MTOM 1.0|
-|RDAPI-21275|Application default quota in days produces "Cannot instantiate API constraint" error|
-|RDAPI-21295|XSD files are not downloaded when Use client registry is enabled|
-|RDAPI-21325|Improve load time performance of the Applications screen|
-|RDAPI-21332|Cassandra 2.2.12 Vulnerabilities from latest scan|
-|RDAPI-21384|Webservice (WSDL-based) responds with 500 instead of 405 when an invalid HTTP method is used|
-|RDAPI-21411|Inconsistent treatment of multiple scopes in Oauth request|
-|RDAPI-21423|Quota values getting re-initialized just after clicking quota text box|
-|RDAPI-21438|Search box for Applications will not accept certain Unicode characters|
-|RDAPI-21456|Application export doesn't include external credential|
-|RDAPI-21514|Policy shortcut chain filter corrupts priority order when altering the sequence|
-|RDAPI-21653|Custom Property Maximum Size|
-|RDAPI-21675|API Gateway Manager > Messaging > {Queue}: display issue long name queue|
-|RDAPI-21680|Method PATCH not visible api gateway - traffic monitor http filter|
-|RDAPI-21770|Incorrect semantics of negated match types like IS_NOT in Compare Attribute filter|
-|RDAPI-21875|User creation failing under small load|
-|RDAPI-22147|API Manager GUI - API sorting issue|
-|RDAPI-22164|Policy Studio UX issue, shows original, non environmentalized URL for DB|
-|RDAPI-22197|Report display issue|
-|RDAPI-22204|Wrong documentation on API Manager Swagger/OAS for corsOrigins|
-|RDAPI-22221|libxml Error while importing WSDL|
-|RDAPI-22331|automated submission form protection for forgottenpassword|
-|RDAPI-22333|OAS 3 import implicitly requires a "servers" object, which should not be mandatory|
-|RDAPI-22425|Missing HTTP Security Headers|
-|RDAPI-22430|Issues removing custom policies from API Manager|
-|RDAPI-22452|On APIMgr monitoring, application id is displayed instead of application name|
-|RDAPI-22455|Self crosssite scripting vulnerability in API Manager|
-|RDAPI-22459|Accept header in per-method override is not replacing header|
-|RDAPI-22513|Package properties not visible, PS and CS tools on Linux|
-|RDAPI-22599|APIM does accept colon (:) in query parameter name|
-|RDAPI-22624|API GW audit.log cannot handle UTF-8, unlike trace log.|
-|RDAPI-22671|XPath wizard - Unexpected behavior of 'Evaluate' button|
-|RDAPI-22756|No longer able to search applications by ID on API Manager 7.7|
-|RDAPI-22760|setting for EMT offload of audit.log files|
-|RDAPI-22763|Need Support for McAfee Scan Engine 6200|
-|RDAPI-22764|Slowness with APIGateway Policy Studio, Windows ver 1803 and 1809|
-|RDAPI-22857| Renaming the apiadmin user via the server settings fails|
-|RDAPI-22954|swagger imports fine, but comes out with error from catalog 2.0 link|
-|RDAPI-22987|APIM login endpoint stops responding when pod has been running for 30 days|
-|RDAPI-23017|Bigmsg leaks when client resets abruptly|
-|RDAPI-23220|APIG crash caused by regular expression redaction|
-|RDAPI-23222|Unable to create user as error pop up is displayed|
-|RDAPI-23304|Trace file level is not persistent after Dynamic Setting change|
-|RDAPI-23326|Cassandra CVE-2020-13946|
-|RDAPI-23363|API Gateway does not support session recovery with SoftHSM dynamic instances|
-|RDAPI-23379|API Catalog shows http and https base urls, customer wants only https|
-|RDAPI-23470|STARTTLS broken in most SMTP modalities|
-|RDAPI-23471|if custom API Proxy broker, customized backend service url is not kept in serviceprofiles in .dat export|
-|RDAPI-23473|Packet sniffing|
-|RDAPI-23553|JWT Decrypt filter not failing with invalid key|
-|RDAPI-23557|TraceRedactor error:java.lang.RuntimeException: regex error with code: -10|
-|RDAPI-23571|OAuth access tokens can be refreshed even after expiration when Cassandra TTL is NULL|
-|RDAPI-23601|add header in inbound security for frontend doesn't appear anymore in params.header|
-|RDAPI-23654|ANM logs passwords in plain text at DATA level|
-|RDAPI-23655|When an APIM administrator changes a user's password, the user's session should be ended|
-|RDAPI-23658|Deploy fails to an instance in API Manager group|
-|RDAPI-23661|API Gateway replaces form-data characters in request|
-|RDAPI-23665|Cert chain not imported when certificate is imported from a URL ending in ".local"|
-|RDAPI-23696|No UUID Validation for API Key|
-|RDAPI-23727|jan21 apimng loads application page twice|
-|RDAPI-23729|Import config fragment produces inconsistent results when an API is partially imported in REST API reporsitory|
-|RDAPI-23715|SSO users in API Manager are not logged out when logging out of API Portal|
+| Internal ID | Description                                                                                                                                                        |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RDAPI-16486 | Changes in the mapper always require a reload in the Execute Data Maps filter and once reloaded then providing values for the required parameters must be repeated |
+| RDAPI-17282 | Connector for Salesforce APIs in API Manager doesn't work or is impossible to configure                                                                            |
+| RDAPI-17395 | APIGW Analytics - no data in DB during DB unavailability                                                                                                           |
+| RDAPI-18332 | "Try-it" for API-Method is not working                                                                                                                             |
+| RDAPI-18523 | Inconsistent application search behaviour relating to application sharing                                                                                          |
+| RDAPI-18601 | EMT environmentalisation issue                                                                                                                                     |
+| RDAPI-18986 | projpack is unable to merge projects after projupgrade; likely due to Default APIManager policies                                                                  |
+| RDAPI-18990 | "Failed to delete undefined" window pops up unexpectedly when attempting to delete application                                                                     |
+| RDAPI-19217 | Inconsistency between Application Developers and Account Settings pages in Manager                                                                                 |
+| RDAPI-19292 | When an APIM admin user's login name is changed, the user is directed to a blank page                                                                              |
+| RDAPI-19293 | API Catalog Try It shows only the first security device of a security profile                                                                                      |
+| RDAPI-19334 | Access to retired APIs is not removed from other organizations as expected                                                                                         |
+| RDAPI-19436 | API approve/enable functionality for an organization does not show on application view                                                                             |
+| RDAPI-19442 | Saving Mode Stuck for the Application Creation in different session                                                                                                |
+| RDAPI-19601 | Sharing section of Application issue when Organization of application changed                                                                                      |
+| RDAPI-19742 | API metrics ignore an API's organization                                                                                                                           |
+| RDAPI-19743 | API Broker not shown in circuit path on all failures                                                                                                               |
+| RDAPI-20527 | xml2json filter, unable to use xml with valid namespace syntax                                                                                                     |
+| RDAPI-20593 | Issue with Authentication profiles related to permethod override                                                                                                   |
+| RDAPI-20594 | When a token is revoked with an incorrect Authorization header, the response is 400 instead of 401                                                                 |
+| RDAPI-20726 | How to get attribute value for apimgmt.application.id                                                                                                              |
+| RDAPI-20742 | Inconsistent deletion of Environmentalized Settings                                                                                                                |
+| RDAPI-20952 | NullPointerException when opening a project with dependencies                                                                                                      |
+| RDAPI-21009 | Issue after updating API Manager settings through rest api if lockUserAccount is missing                                                                           |
+| RDAPI-21061 | updated error message, OAS3 file import without servers section url                                                                                                |
+| RDAPI-21171 | Minor UI issue affecting pagination in API keys and Oauth client credentials                                                                                       |
+| RDAPI-21188 | AWS SQS Poller does not seem to pass SQS Attributes                                                                                                                |
+| RDAPI-21211 | APIM doesn't support SOAP 1.1 Binding for MTOM 1.0                                                                                                                 |
+| RDAPI-21275 | Application default quota in days produces "Cannot instantiate API constraint" error                                                                               |
+| RDAPI-21295 | XSD files are not downloaded when Use client registry is enabled                                                                                                   |
+| RDAPI-21325 | Improve load time performance of the Applications screen                                                                                                           |
+| RDAPI-21332 | Cassandra 2.2.12 Vulnerabilities from latest scan                                                                                                                  |
+| RDAPI-21384 | Webservice (WSDL-based) responds with 500 instead of 405 when an invalid HTTP method is used                                                                       |
+| RDAPI-21411 | Inconsistent treatment of multiple scopes in Oauth request                                                                                                         |
+| RDAPI-21423 | Quota values getting re-initialized just after clicking quota text box                                                                                             |
+| RDAPI-21438 | Search box for Applications will not accept certain Unicode characters                                                                                             |
+| RDAPI-21456 | Application export doesn't include external credential                                                                                                             |
+| RDAPI-21514 | Policy shortcut chain filter corrupts priority order when altering the sequence                                                                                    |
+| RDAPI-21653 | Custom Property Maximum Size                                                                                                                                       |
+| RDAPI-21675 | API Gateway Manager > Messaging > {Queue}: display issue long name queue                                                                                           |
+| RDAPI-21680 | Method PATCH not visible api gateway - traffic monitor http filter                                                                                                 |
+| RDAPI-21770 | Incorrect semantics of negated match types like IS_NOT in Compare Attribute filter                                                                                 |
+| RDAPI-21875 | User creation failing under small load                                                                                                                             |
+| RDAPI-22147 | API Manager GUI - API sorting issue                                                                                                                                |
+| RDAPI-22164 | Policy Studio UX issue, shows original, non environmentalized URL for DB                                                                                           |
+| RDAPI-22197 | Report display issue                                                                                                                                               |
+| RDAPI-22204 | Wrong documentation on API Manager Swagger/OAS for corsOrigins                                                                                                     |
+| RDAPI-22221 | libxml Error while importing WSDL                                                                                                                                  |
+| RDAPI-22331 | automated submission form protection for forgottenpassword                                                                                                         |
+| RDAPI-22333 | OAS 3 import implicitly requires a "servers" object, which should not be mandatory                                                                                 |
+| RDAPI-22425 | Missing HTTP Security Headers                                                                                                                                      |
+| RDAPI-22430 | Issues removing custom policies from API Manager                                                                                                                   |
+| RDAPI-22452 | On APIMgr monitoring, application id is displayed instead of application name                                                                                      |
+| RDAPI-22455 | Self crosssite scripting vulnerability in API Manager                                                                                                              |
+| RDAPI-22459 | Accept header in per-method override is not replacing header                                                                                                       |
+| RDAPI-22513 | Package properties not visible, PS and CS tools on Linux                                                                                                           |
+| RDAPI-22599 | APIM does accept colon (:) in query parameter name                                                                                                                 |
+| RDAPI-22624 | API GW audit.log cannot handle UTF-8, unlike trace log.                                                                                                            |
+| RDAPI-22671 | XPath wizard - Unexpected behavior of 'Evaluate' button                                                                                                            |
+| RDAPI-22756 | No longer able to search applications by ID on API Manager 7.7                                                                                                     |
+| RDAPI-22760 | setting for EMT offload of audit.log files                                                                                                                         |
+| RDAPI-22763 | Need Support for McAfee Scan Engine 6200                                                                                                                           |
+| RDAPI-22764 | Slowness with APIGateway Policy Studio, Windows ver 1803 and 1809                                                                                                  |
+| RDAPI-22857 | Renaming the apiadmin user via the server settings fails                                                                                                           |
+| RDAPI-22954 | swagger imports fine, but comes out with error from catalog 2.0 link                                                                                               |
+| RDAPI-22987 | APIM login endpoint stops responding when pod has been running for 30 days                                                                                         |
+| RDAPI-23017 | Bigmsg leaks when client resets abruptly                                                                                                                           |
+| RDAPI-23220 | APIG crash caused by regular expression redaction                                                                                                                  |
+| RDAPI-23222 | Unable to create user as error pop up is displayed                                                                                                                 |
+| RDAPI-23304 | Trace file level is not persistent after Dynamic Setting change                                                                                                    |
+| RDAPI-23326 | Cassandra CVE-2020-13946                                                                                                                                           |
+| RDAPI-23363 | API Gateway does not support session recovery with SoftHSM dynamic instances                                                                                       |
+| RDAPI-23379 | API Catalog shows http and https base urls, customer wants only https                                                                                              |
+| RDAPI-23470 | STARTTLS broken in most SMTP modalities                                                                                                                            |
+| RDAPI-23471 | if custom API Proxy broker, customized backend service url is not kept in serviceprofiles in .dat export                                                           |
+| RDAPI-23473 | Packet sniffing                                                                                                                                                    |
+| RDAPI-23553 | JWT Decrypt filter not failing with invalid key                                                                                                                    |
+| RDAPI-23557 | TraceRedactor error:java.lang.RuntimeException: regex error with code: -10                                                                                         |
+| RDAPI-23571 | OAuth access tokens can be refreshed even after expiration when Cassandra TTL is NULL                                                                              |
+| RDAPI-23601 | add header in inbound security for frontend doesn't appear anymore in params.header                                                                                |
+| RDAPI-23654 | ANM logs passwords in plain text at DATA level                                                                                                                     |
+| RDAPI-23655 | When an APIM administrator changes a user's password, the user's session should be ended                                                                           |
+| RDAPI-23658 | Deploy fails to an instance in API Manager group                                                                                                                   |
+| RDAPI-23661 | API Gateway replaces form-data characters in request                                                                                                               |
+| RDAPI-23665 | Cert chain not imported when certificate is imported from a URL ending in ".local"                                                                                 |
+| RDAPI-23696 | No UUID Validation for API Key                                                                                                                                     |
+| RDAPI-23727 | jan21 apimng loads application page twice                                                                                                                          |
+| RDAPI-23729 | Import config fragment produces inconsistent results when an API is partially imported in REST API reporsitory                                                     |
+| RDAPI-23715 | SSO users in API Manager are not logged out when logging out of API Portal                                                                                         |
 
 ### Scripting filter whiteboard attributes not preloaded for Jython scripts
 
