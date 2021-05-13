@@ -419,3 +419,4 @@ Axway-defined Java system properties introduced in the 7.7 20210530 release
 | System Property                                  | Context     | Description   |
 | ------------------------------------------------ | ----------- | ------------- |
 |http.proxyScheme | API Manager | Specifies the scheme to be used, HTTP or HTTPS, when importing an API from a URL through a HTTP Proxy or HTTPS Proxy Server.  |
+|com.vordel.oathAuthorizationRecordsThreshold | API Manager | Specifies the threshold for the records displayed on OAuth Authorizations page. Default value: 10000. |
