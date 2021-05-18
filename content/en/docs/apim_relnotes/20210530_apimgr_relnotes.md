@@ -26,17 +26,42 @@ The following new features and enhancements are available in this update.
 
 API Manager allows Organization Administrators and API Administrators to grant access to their APIs within any organization. Now, you can also view the usage of APIs, where access has been granted to organizations and their applications, as well as revoking their access. For more information, see [Manage API access](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/#manage-api-access).
 
-### YAML configuration store (Technical preview capability)
+### YAML configuration store (GA)
 
-This update includes bug fixes and enhanced functionality for YAML configuration as follows:
+The YAML configuration store feature reached General Availability (GA) in this update of API Gateway, and it is now production-ready.
 
-* YAML configuration templates.
-* Add support for YAML configuration in Topology API.
-* Support for YAML configuration in multi-node topology.
-* Entities with same key fields at the same hierarchy level is now fully supported.
-* CLI import sub-command now comes with new options to relax some constraint and facilitate import.
+The YAML configuration store provides a more CI/CD/DevOps and developer-friendly means of creating and managing API Gateway configuration. It involved transforming the federated configuration into YAML fragments, which can be managed using standard DevOps tools, moving away from a proprietary TeamDev approach to encourage the use of standard tools, source control, and DevOps tools that can be used to facilitate and encourage a better experience for collaboration.​
 
-See the [September 2020](/docs/apim_relnotes/20200930_apimgr_relnotes/#yaml-configuration-store-technical-preview-capability) release notes for an overview of this technical preview, and the [YAML configuration](/docs/apim_yamles/) documentation for more detailed information.
+This initiative focuses on:​
+
+* Fine-grained configuration for an improved collaborative development experience​.
+* Managing configuration as code for a developer-friendly​ experience.
+* Design for improved DevOps capability (CLI tooling, extended environmentalization).
+
+The XML configuration store is still supported and is enabled as the primary configuration format.
+
+We strongly encourage our customers to explore the possibilities of the new configuration format, and provide feedback to us on this experience.
+
+For more information, see:
+
+* [Axway API Management User Group - Learn how to DevOps your configuration](https://community.axway.com/s/article/Axway-APIM-User-Group-Learn-how-to-DevOps-your-Configuration): a 1h video to get you started with YAML Configuration.
+* [YAML configuration reference documentation](/docs/apim_yamles/) for more detailed information.
+* [Axway University YAML Entity Store](https://university.axway.com/learn/course/1362/play/1759/about-the-yaml-entity-store) free course.
+
+To follow-up on what's coming based on this capability, see [API Management Roadmap](https://community.axway.com/s/api-management).
+
+#### Update API Gateway with technical preview YAML configurations deployed
+
+This procedure is valid **for API Gateway May 21 update only**. Later versions will upgrade the YAML configuration automatically when running a service pack update.
+
+Perform these steps to update an API Gateway installation, which has YAML configuration from [January 21](/docs/apim_relnotes/20210130_apimgr_relnotes/#yaml-configuration-store-technical-preview-capability) or [March 21](/docs/apim_relnotes/20210330_apimgr_relnotes/#yaml-configuration-store-technical-preview-capability) updates deployed:
+
+1. For each API Gateway installation, back up your deployed YAML configurations.
+2. Deploy a simple **federated store**, as a placeholder, to replace all deployed YAML configurations. For example, a configuration created with Policy Studio using a template.
+3. Stop any running gateways.
+4. Run `yamles upgrade --targz` on your backed up configuration to create a `.tar.gz` file. For more information, see [Upgrade YAML configuration](/docs/apim_yamles/apim_yamles_cli/yamles_cli_upgrade).
+5. Update [API Gateway server](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/).
+6. Deploy your upgraded YAML configurations, using `managedomain` or `projdeploy` scripts, to replace the placeholder configuration. For more information, see [Package and deploy a YAML configuration](/docs/apim_yamles/yamles_packaging_deployment).
 
 ## Important changes
 
