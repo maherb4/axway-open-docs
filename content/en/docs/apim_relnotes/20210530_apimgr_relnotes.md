@@ -54,7 +54,7 @@ To follow-up on what's coming based on this capability, see [API Management Road
 
 This procedure is valid **for API Gateway May 21 update only**. Later versions will upgrade the YAML configuration automatically when running a service pack update.
 
-Perform these steps to update an API Gateway installation, which has YAML configuration from [January 21](/docs/apim_relnotes/20210130_apimgr_relnotes/#yaml-configuration-store-technical-preview-capability) or [March 21](/docs/apim_relnotes/20210330_apimgr_relnotes/#yaml-configuration-store-technical-preview-capability) updates deployed:
+Perform these steps to update an API Gateway installation, which has YAML configuration from the [March 21 update](/docs/apim_relnotes/20210330_apimgr_relnotes/#yaml-configuration-store-technical-preview-capability) deployed:
 
 1. For each API Gateway installation, back up your deployed YAML configurations.
 2. Deploy a simple **federated store**, as a placeholder, to replace all deployed YAML configurations. For example, a configuration created with Policy Studio using a template.

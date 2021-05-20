@@ -6,17 +6,17 @@
 "description": "List of known limitations related to the YAML configuration."
 }
 
-## Upgrade YAML configurations made with technical preview releases
+## Upgrade YAML configurations made with a Technical Preview release
 
-YAML configuration upgrade is supported in a fully automated way. However upgrade support to existing YAML configurations, created using technical preview releases, can be perform following these criteria:
+YAML configuration upgrade is supported in a fully automated way. However, upgrade support to YAML configurations created using a technical preview release, can be performed following these criteria:
 
 * Technical preview releases can be upgraded with manual steps, as described in following sections.
-* Any YAML configuration created before [API Gateway Jan 21](/docs/apim_relnotes/20210130_apimgr_relnotes/) update cannot be upgraded.
-* The service pack update (`update_apigw`) script does not support YAML configuration upgrade prior to [API Gateway May 21](/docs/apim_relnotes/20210530_apimgr_relnotes/#yaml-configuration-store-ga) update.
+* Any YAML configuration created before [API Gateway March 21 update](/docs/apim_relnotes/20210330_apimgr_relnotes/) cannot be upgraded.
+* The service pack update (`update_apigw.sh`) script does not support YAML configuration upgrade prior to [API Gateway May 21 update](/docs/apim_relnotes/20210530_apimgr_relnotes/#yaml-configuration-store-ga).
 
-### Upgrade technical preview releases
+### Upgrade Technical Preview releases
 
-To upgrade configurations made with **Preview releases** since [API Gateway Jan 21](/docs/apim_relnotes/20210130_apimgr_relnotes/) (prior versions are not supported), perform the following steps:
+To upgrade configurations made with a [Technical Preview release](/docs/apim_relnotes/20210330_apimgr_relnotes/), perform the following steps:
 
 1. Change directory to your configuration root directory.
 2. Create a file named `_version.yaml` in the `META-INF` directory.
