@@ -110,7 +110,9 @@ This version of API Gateway and API Manager includes:
 
 ### Other fixed issues
 
-table
+| Internal ID | Description |
+| ----------- | ----------- |
+| RDAPI-24200 | Content of some YAML configuration files are shuffled after upgrade causing unnecessary git diff |
 
 ## Known issues
 
