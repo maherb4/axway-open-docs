@@ -75,6 +75,10 @@ Host name verification is not enabled for upgrading customers, who use Embedded 
 
 Enabling host name verification requires a certificate update. For more information, see [Embedded ActiveMQ settings in Policy Studio](/docs/apim_reference/general_activemq_settings/).
 
+### Changes to JWT Verify filter
+
+There are new output options that can be configured for the JWT Verify filter in Policy Studio. For more information, see [JWT Verify - Output](/docs/apim_policydev/apigw_polref/integrity_additional/#verify-output).
+
 ## Deprecated features
 
 As part of our software development life cycle we constantly review our API Management offering. In this update, the following capabilities have been deprecated:
