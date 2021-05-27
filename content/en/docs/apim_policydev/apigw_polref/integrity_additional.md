@@ -352,7 +352,9 @@ For more information about detached JWS, see [Appendix F of JWS RFC 7515](https:
 
 ### Verify Output
 
-The **Output** tab lets you configure how the filter returns a JWS object. You can configure the following options:
+The **Output** tab lets you configure how the filter returns a JWS object. Configuring the payload options in this tab is not necessary if **Detached Signature** is selected in the **Advanced** tab, as the payload will be available in the `detached payload message` attribute instead.
+
+You can configure the following options:
 
 * **Set payload as Content Body**: Writes the JWT payload to the `${content.body}` attribute.
 * **Use cty header for content-type**: Sets the content-type of the message body to be the value of the `cty` header in the JWT.
