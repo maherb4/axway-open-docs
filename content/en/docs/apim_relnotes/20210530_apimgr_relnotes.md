@@ -65,8 +65,9 @@ Perform these steps to update an API Gateway installation, which has YAML config
 
 ## Important changes
 
-It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update.
+It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
 
+<!-- RDAPI-21747 -->
 ### Embedded ActiveMQ host name verification
 
 Host name verification was introduced to alleviate a potential CWE-933 security risk, and it is enabled by default on the Embedded ActiveMQ cluster of new API Gateway installations, which choose to use Embedded Active MQ with SSL enabled. Host name verification is now disabled for customers who use Embedded Active MQ with SSL enabled or who are updating or upgrading the product, as this will result in JMS queues unable to service requests. Enabling host name verification when using SSL is a more secure option and should be considered as part of the upgrade.
@@ -82,6 +83,31 @@ The `SHA-256` algorithm option is designed to replace the existing `MD5` algorit
 ### Changes to JWT Verify filter
 
 There are new output options that can be configured for the JWT Verify filter in Policy Studio. For more information, see [JWT Verify - Output](/docs/apim_policydev/apigw_polref/integrity_additional/#verify-output).
+
+<!-- RDAPI-22777 -->
+### Analytics CSP Header
+
+For users of the Analytics application, the default Content Security Policy header for Analytics has been enhanced to be more restrictive and secure in the content which it accepts. If loading non-standard content into the Analytics UI, you might need to adjust the CSP headers setting in `envProps.settings`, under the `env.ANALYTICS.CONTENTSECURITYPOLICY` field.
+
+<!-- RDAPI-23947 -->
+### Authorization records threshold
+
+Some customers with large number of OAuth tokens have experienced a significant slowdown in response times within API Manager after logging in. To address this situation two changes have been made. Firstly, OAuth authorizations are now only loaded when a user visits the OAuth Authorizations screen itself. Secondly, because of the limited ability of Cassandra to paginate data, a Java system property has been introduced whereby the screen is no longer populated if the number of tokens is above a configured threshold. The property is called `com.vordel.oauthAuthorizationRecordsThreshold`, and it defaults to `-1`, meaning no change in behavior compared to before. Setting this value to, for example, `10000`, means that if there are more than ten thousand tokens in the Cassandra table, then the screen is not populated and a warning message is display to inform the user.
+
+<!-- RDAPI-23648 -->
+### Permissions on apigateway folder
+
+The default permissions on the `apigateway` folder have been restricted down to a Linux 750 level (read/write/execute for owner, read/execute for group, no permissions for world), to provide additional protection for sensitive content, including files and sub-folders.
+
+<!-- RDAPI-23649 -->
+### Replacement of MD5 hashed API Gateway configuration files with SHA256
+
+API Gateway configuration files were previously provided with an accompanying MD5 hashed version, to provide a means of verifying data integrity. The MD5 version of the files has now been removed and replaced with a stronger hashed version using SHA256. Customers that have carried out integrity checks on the MD5 version should now switch to the SHA256 files instead.
+
+<!-- Note for attention -->
+### Notice of schedule change for updates
+
+The cadence of the updates for API Gateway, API Manager, and API Portal is changing. From the May update onwards, the update schedule will change from every two months to every three months. The next update is now scheduled for August 2021.
 
 ## Deprecated features
 
