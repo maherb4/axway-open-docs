@@ -3,16 +3,17 @@ title: API Portal 7.7 May 2021 Release Notes
 linkTitle: API Portal May 2021
 weight: 95
 date: 2021-04-26
-description: API Portal updates are cumulative, comprising new features and changes delivered in previous updates unless specifically indicated otherwise in the Release notes.
+description: API Portal updates are cumulative, comprising new features and
+  changes delivered in previous updates unless specifically indicated otherwise
+  in the Release notes.
 ---
-
 ## Installation
 
 API Portal is available as a software installation or a virtualized deployment in a Docker container. For more information, see the following options:
 
 * If you are installing API Portal for the first time using this update, see [Install API Portal](/docs/apim_installation/apiportal_install/).
 * If you are already using API Portal (7.5.x, 7.6.x, 7.7.x) and want to install this update, see [Upgrade API Portal](/docs/apim_installation/apiportal_install/upgrade_automatic/).
-* You can use the [cumulative upgrade script](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-api-portal-using-the-cumulative-upgrade-script) to upgrade directly from earlier versions (for example, 7.5.5, 7.6.2) to API Portal [7.7 November](/docs/apim_relnotes/20201130_apip_relnotes/), then apply this update package to update your API Portal to the March 21 release.
+* You can use the [cumulative upgrade script](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-api-portal-using-the-cumulative-upgrade-script) to upgrade directly from earlier versions (for example, 7.5.5, 7.6.2) to API Portal [7.7 November](/docs/apim_relnotes/20201130_apip_relnotes/), then apply this update package to update your API Portal to the May 21 release.
 * See [API Portal single version upgrade](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-from-api-portal-7-6-2) to upgrade versions incrementally.
 
 ### Docker containers
@@ -22,9 +23,7 @@ API Portal is available as a software installation or a virtualized deployment i
 
 ## New features and enhancements
 
-### placeholder
-
-placeholder
+In API Portal May 2021 update we are not introducing new functionalities. The focus in this updade was to work on fixes of defects.
 
 ## Limitations of this update
 
@@ -42,9 +41,7 @@ There are no major changes in this update.
 
 ## Deprecated features
 
-As part of our software development life cycle we constantly review our API Management offering. In this update, the following capabilities have been deprecated:
-
-* placeholder
+There are no deprecated features in this update.
 
 ## Removed features
 
