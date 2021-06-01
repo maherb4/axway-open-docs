@@ -26,6 +26,12 @@ The following new features and enhancements are available in this update.
 
 API Manager allows Organization Administrators and API Administrators to grant access to their APIs within any organization. Now, you can also view the usage of APIs, where access has been granted to organizations and their applications, as well as revoking their access. For more information, see [Manage API access](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/#manage-api-access).
 
+### Import APIs over HTTPS through a HTTPS proxy server
+
+It is now possible to send an API download request to a HTTPS proxy server over HTTPS. This ensures the confidentiality of the download request as the request is sent over HTTPS.
+
+If using a proxy server to import APIs is a requirement, then it is recommended to do so by using a HTTPS Proxy server. For more information, see [Configure a proxy server](/docs/apim_administration/apimgr_admin/api_mgmt_config/#configure-a-proxy-server).
+
 ### YAML configuration store (GA)
 
 The YAML configuration store feature reached General Availability (GA) in this update of API Gateway, and it is now production-ready.
@@ -67,6 +73,12 @@ Perform these steps to update an API Gateway installation, which has YAML config
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
 
+### Notice of schedule change for updates
+
+The cadence of the updates for API Gateway, API Manager, and API Portal is changing. From the May update onwards, the update schedule will change from every two months to every three months.
+
+{{% alert title="Note" %}}The next update is now scheduled for August 2021.{{% /alert  %}}
+
 <!-- RDAPI-21747 -->
 ### Embedded ActiveMQ host name verification
 
@@ -79,6 +91,12 @@ Note that enabling host name verification requires a certificate update. For mor
 To improve security in API Gateway, a new `SHA-256 hash` algorithm option was added to [File Upload](/docs/apim_policydev/apigw_polref/routing_additional/#file-upload-filter) and [File Download](/docs/apim_policydev/apigw_polref/routing_additional/#file-download-filter) routing filters, and [FTP Poller](/docs/apim_policydev/apigw_gw_instances/general_ftp_scanner/) on SFTP server fingerprint check.
 
 The `SHA-256` algorithm option is designed to replace the existing `MD5` algorithm, and it is advisable to use it now as it is more secure.
+
+### INSTALL_DIR/apigateway folder permissions changed
+
+The permissions on `INSTALL_DIR/apigateway` folder have been restricted down on Linux from `755` to `750` to provide additional protection for sensitive content, including files and sub-folders. With this change, access is denied to users who are not an owner or part of the group read, write, and execute permissions.
+
+{{% alert title="Note" %}}It is recommended to verify any business process or custom scripts that access files in this directory as this is potentially a breaking change.{{% /alert %}}
 
 ### Changes to JWT Verify filter
 
@@ -103,11 +121,6 @@ The default permissions on the `apigateway` folder have been restricted down to 
 ### Replacement of MD5 hashed API Gateway configuration files with SHA256
 
 API Gateway configuration files were previously provided with an accompanying MD5 hashed version, to provide a means of verifying data integrity. The MD5 version of the files has now been removed and replaced with a stronger hashed version using SHA256. Customers that have carried out integrity checks on the MD5 version should now switch to the SHA256 files instead.
-
-<!-- Note for attention -->
-### Notice of schedule change for updates
-
-The cadence of the updates for API Gateway, API Manager, and API Portal is changing. From the May update onwards, the update schedule will change from every two months to every three months. The next update is now scheduled for August 2021.
 
 ## Deprecated features
 
@@ -146,15 +159,21 @@ This version of API Gateway and API Manager includes:
 
 ### Fixed security vulnerabilities
 
-| Internal ID | Case ID | Cve Identifier | Description                                                                                                                                                                                          |
-| ----------- | ------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RDAPI-21747 |         |                | **Issue**: TLS host name verification is not configurable and cannot be enabled for Embedded ActiveMQ. **Resolution**: TLS host name verification is now configurable, and it is enabled by default. |
+| Internal ID | Case ID            | Cve Identifier                               | Description      |
+| ----------- | ------------------ | -------------------------------------------- | ---              |
+|RDAPI-21747||CWE-933|**Issue**: TLS host name verification is not configurable and cannot be enabled for Embedded ActiveMQ. **Resolution**: TLS host name verification is now configurable, and it is enabled by default.|
+|RDAPI-23668||CWE-350|**Issue**: DNS re-branding in NodeJS < 10.24. **Resolution**: The version of NodeJS shipped with API Gateway to facilitate client SDK generator was upgraded to 10.24.0.|
+|RDAPI-23400||CWE-693|**Issue**: Default security headers missing in API Gateway Manager 302 responses. **Resolution**: Added missing default security headers.|
+|RDAPI-23367||CWE-693|**Issue**: X-XSS-Header should be set to '1; mode=block' by default. **Resolution**: Updated instances of X-XSS-Header to be '1; mode=block'.|
+|RDAPI-21214||CWE-319|**Issue**: Insecure transport when importing API over HTTP through HTTP Proxy. **Resolution**: Added option to import API securely over HTTPS through HTTPS Proxy.|
+|RDAPI-14825||CWE-89|**Issue**: Query string injection: Amazon Web Services. **Resolution**: Removed unused filter and processor from product.|
 
 ### Other fixed issues
 
 | Internal ID | Description |
 | ----------- | ----------- |
 | RDAPI-24200 | Content of some YAML configuration files are shuffled after upgrade causing unnecessary git diff |
+| RDAPI-21693 | The Oracle JDBC driver used by API Gateway and Policy Studio upgraded from OJDBC6 to OJDBC8 |
 
 ## Known issues
 
