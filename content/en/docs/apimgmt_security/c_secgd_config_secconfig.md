@@ -31,13 +31,18 @@ For more information, see [Configure HTTP Strict Transport Security](/docs/apim_
 
 ### Content Security Policy
 
-The Content-Security-Policy (CSP) header sets a policy that instructs the browser to only fetch resources, such as scripts, images, or objects, from the specified locations. After CSP is configured, a compliant browser loads resources from locations listed in the policy. The CSP header reduces the ability of an attacker to inject malicious content and helps to protect a web page from attacks like Cross-Site Scripting (XSS), dynamic code execution, and clickjacking.
+The Content-Security-Policy [(CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) header sets a policy that instructs the browser to only fetch resources, such as scripts, images, or objects, from the specified locations. After CSP is configured, a compliant browser loads resources from locations listed in the policy. The CSP header reduces the ability of an attacker to inject malicious content and helps to protect a web page from attacks like Cross-Site Scripting (XSS), dynamic code execution, and clickjacking.
 
 ```
 Syntax: Content-Security-Policy: <directive> <value>; <directive> <value>;...
 ```
 
-For more information, see [Define a restrictive Content Security Policy](/docs/apim_installation/apiportal_install/secure_harden_portal/#define-a-restrictive-content-security-policy).
+The CSP header is enabled by default in API Gateway and API Manager. To change the configuration of the header, you must update the product's Java properties file, `envSettings.props`, which is available in the following locations:
+
+* For API Gateway, update the variable `env.MANAGEMENT.CONTENTSECURITYPOLICY` in the `apigateway/conf/envSettings.props` file.
+* For API Manager, update the variable `env.SERVICES.CONTENTSECURITYPOLICY` in the `apigateway/groups/{group-id}/{instance-id}/conf/envSettings.props` file.
+
+For API Portal settings, see [Define a restrictive Content Security Policy](/docs/apim_installation/apiportal_install/secure_harden_portal/#define-a-restrictive-content-security-policy).
 
 ### X-XSS-Protection
 
