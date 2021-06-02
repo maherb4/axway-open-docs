@@ -58,11 +58,26 @@ This version of API Portal includes:
 
 ### Fixed security vulnerabilities
 
-table
+| Internal ID | Case ID | CVE Identifier | Description                                                                                                                                                               |
+| ----------- | ------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IAP-4106    |         | CVE-2020-7760  | **Issue**: Joomla 3.9.25 is using vulnerable version of codemirror@5.56.0. **Resolution**: Joomla@3.9.26 has updated codemirror version to 5.60.0.                        |
+| IAP-4312    |         |                | **Issue**: Docker image was using vulnerable openssl-libs package. **Resolution**: openssl-libs package version has been upgraded to a safer version.                            |
+| IAP-4051    |         |                | **Issue**: API Portal is having transitive dependency of vulnerable version of lodash. **Resolution**: All dependencies of lodash are now upgraded.                       |
+| IAP-4323    |         |                | **Issue**: Docker image was using vulnerable Nettle package. **Resolution**: Nettle package has been upgraded to a non-vulnerable version.                                |
+| IAP-4315    |         |                | **Issue**: Docker image was using vulnerable RPM package. **Resolution**: RPM package has been upgraded to a non-vulnerable version.                                      |
+| IAP-4335    |         |                | **Issue**: Vulnerable library is found in API Portal docker image - bind-export-libs@9.11.20-5.el8_3.1. **Resolution**: bind-export-libs has been removed from the image. |
 
 ### Other fixed issues
 
-table
+| Internal ID | Case ID | Description     |
+| ----------- | ------- | ---------------- |
+| IAP-4062    | 1240639 | **Issue**: When API Portal is uninstalled, its Database was also uninstalled. **Resolution**: An option for uninstalling the Database was added, the default value is true (Database will be removed) when API Portal is removed.                          |
+| IAP-4076    | 1231091 | **Issue**: 1) The way API manager and API Portal handle RegEx in custom properties is inconsistent: API Manager does not support slashes, but API Portal supports them. 2) The custom required field is not enforced in the API Portal - missing implementation. **Resolution**: 1) Custom properties RegEx ID is handled in a consistent way between the products now. 2) The custom required property is now implemented to be enforced in API Portal. |
+| IAP-4286    | 1240482 | **Issue**: SQL errors during install/upgrade were not logged. **Resolution**: Add `database-error` category for logging during install/upgrade.                                                                                                                                                                                                                                                                                                        |
+| IAP-4288    | 1253710 | **Issue**: Users are not able to configure the redirect destination in case of unauthorized request. **Resolution**: A new field is added in JAI for redirect on unauthorized request.                                                                                                                                                                                                                                                                   |
+| IAP-4298    | 1255208 | **Issue**:  It's not possible to configure CSP from API Portal, and the documentation described how to do it using server configuration, which did not work for inline scripts. **Resolution**: A proper Content Security Policy is configured in API Portal with ability to be disabled and edited from JAI; and the documentation is updated.                                                                                                          |
+| IAP-4300    | 1257209 | **Issue**: Error message of custom property is not translatable. **Resolution**: Error message of custom property can be translated.     |
+| IAP-4329    | 01261309 | **Issue**: `apiportal_db_pass_encryption.sh` can't finish execution because of not supported message digest hashing algorithm. **Resolution**: The "message digest" option is removed from the script because it is not needed.     |
 
 ## Known issues
 
