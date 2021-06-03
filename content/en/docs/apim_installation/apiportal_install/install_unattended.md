@@ -202,6 +202,10 @@ This can be useful to avoid adding sensitive data to the configuration file, or 
 
 {{< alert title="Note" color="primary" >}}Do not add sensitive information to the configuration file.{{< /alert >}}
 
+Watch this video to learn how to install and uninstall API Portal using a configuration file:
+
+{{< youtube HqQ77Cj2s5E >}}
+
 ## Encrypt the Public API user password in unattended mode
 
 To encrypt the Public API mode user password in unattended mode:
