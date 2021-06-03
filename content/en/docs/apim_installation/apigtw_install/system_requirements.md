@@ -83,7 +83,7 @@ This section describes the supported database versions.
 API Gateway and API Manager support the following relational databases to store metrics data:
 
 * MySQL Server 5.7, 8.0
-* MariaDB 5.5, 10.1
+* MariaDB 10.2, 10.5
 * Microsoft SQL Server 2016, 2017, and 2019
 * Oracle 12.2, 18c, and 19c
 * IBM DB2 10.5

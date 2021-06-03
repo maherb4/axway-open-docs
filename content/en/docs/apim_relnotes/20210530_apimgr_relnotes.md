@@ -142,7 +142,7 @@ SFTP server fingerprint check using `MD5` hash algorithm is deprecated on [File 
 
 The following items are end of support (EOS):
 
-* placeholder
+* MariaDB 5.5
 
 ### Removed features
 

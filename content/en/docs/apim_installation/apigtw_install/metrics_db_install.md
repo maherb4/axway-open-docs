@@ -38,9 +38,7 @@ You must add the JDBC driver files for your chosen third-party database to your 
 
 If you are using MariaDB, you must use the MariaDB JDBC driver (MariaDB Connector/J 2.7.2) with the MariaDB database connection URL, for example, `jdbc:mariadb://DB_HOST:3306/reports`.
 
-If you are using MySQL 8, you will not be able to use both MySQL 8 and MariaDB 10.2 databases in the same configuration. For example, use MySQL 8 as the metrics database and MariaDB 10.2 as the KPS. Also, if using MySQL 8, by default, only the 5.1.x series of JDBC drivers (from 5.1.47 upwards) will work.
-
-If you wish to use a later MySQL JDBC driver version, for example, 8.x, then the MySQL Driver class name in the JDBC Drivers section of the entity store must be updated from `org.gjt.mm.mysql.Driver` to `com.mysql.cj.jdbc.Driver`.
+If you are using MySQL 8, only the later 5.1.x series of JDBC drivers (from 5.1.47 upwards) will work. If you wish to use a later MySQL JDBC driver version, for example, 8.x, then the MySQL Driver class name in the JDBC Drivers section of the entity store must be updated from `org.gjt.mm.mysql.Driver` to `com.mysql.cj.jdbc.Driver`.
 
 ### Add JDBC drivers to API Gateway
 
