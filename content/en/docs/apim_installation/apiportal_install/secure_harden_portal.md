@@ -387,9 +387,9 @@ These are some general recommendations:
 
 ## Define a restrictive Content Security Policy
 
-The HTTP Content Security Policy ([CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)) response header instructs compliant browsers on how they may interact with external sites while in the current context. This enables the server to control interaction with code and content from third-parties, mitigating some client-side code injection attacks. The policy allows the server to specify what connections are permitted for each type of resource (scripts, styles, fonts, and so on).
+Content Security Policy ([CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)) sets a policy that instructs the browser to only fetch resources, such as scripts, images, or objects, from the specified locations. After CSP is configured, a compliant browser loads resources from locations listed in the policy. CSP reduces the ability of an attacker to inject malicious content and helps to protect a web page from attacks like Cross-Site Scripting (XSS), dynamic code execution, and clickjacking.
 
-The CSP is enabled by default in API Portal. To change its configuration, in JAI, click **Extensions > Plugins > API Portal - System**. In the plugin settings you can edit, enable, or disable the policy. Because API Portal uses some inline scripts, you must use nonces to ensure that you are using API Portal securely. If you do not want to take advantage of the nonces you can remove them from the policy.
+CSP is enabled by default in API Portal. To change its configuration, in JAI, click **Extensions > Plugins > API Portal - System**. In the plugin settings you can edit, enable, or disable the policy. Because API Portal uses some inline scripts, you must use nonces to ensure that you are using API Portal securely. If you do not want to take advantage of the nonces you can remove them from the policy.
 
 ## Define retention periods for personal data
 
