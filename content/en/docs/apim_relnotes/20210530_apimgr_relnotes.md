@@ -71,7 +71,9 @@ Perform these steps to update an API Gateway installation, which has YAML config
 
 #### Support for MariaDB 10.5 added
 
-The product now supports MariaDB 10.5 for metrics, For more details see [Install and configure a metrics database](docs/apim_installation/apigtw_install/metrics_db_install.md). Please note that MariaDB 5.5 is no longer supported.
+The product now supports MariaDB 10.5. 
+
+For more details see [Install and configure a metrics database](docs/apim_installation/apigtw_install/metrics_db_install.md). Please note that MariaDB 5.5 is no longer supported.
 
 ## Important changes
 
@@ -114,8 +116,6 @@ For users of the Analytics application, the default Content Security Policy head
 Some customers with large number of OAuth tokens have experienced a significant slowdown in response times within API Manager after logging in. To address this situation two changes have been made. Firstly, OAuth authorizations are now only loaded when a user visits the OAuth Authorizations screen itself. Secondly, because of the limited ability of Cassandra to paginate data, a Java system property has been introduced whereby the screen is no longer populated if the number of tokens is above a configured threshold. The property is called `com.vordel.oauthAuthorizationRecordsThreshold`, and it defaults to `-1`, meaning no change in behavior compared to before. Setting this value to, for example, `10000`, means that if there are more than ten thousand tokens in the Cassandra table, then the screen is not populated and a warning message is display to inform the user.
 
 <!-- RDAPI-23648 -->
-
-
 
 ### Replacement of MD5 hashed API Gateway configuration files with SHA256
 
