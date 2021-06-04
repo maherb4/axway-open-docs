@@ -201,6 +201,7 @@ This version of API Gateway and API Manager includes:
 |RDAPI-24223|01257725  01257310|**Issue**: API Manager filter OAuth Authorizations by owner not working. **Resolution**: OAuth Authorizations can be filtered by application name, scope, owner, or creation date (same back-end and front-end locale).|
 |RDAPI-24266|01258234|**Issue**: Service Handler filter cannot be edited to change routing settings from 'Direct Connection to Service Endpoint' to 'Delegate to Routing Policy'. **Resolution**: Service Handler filter can be edited.|
 |RDAPI-24318|01179461|**Issue**: Unexpected correlation ID on failure using OAuth (External) device. **Resolution**: The correlation ID is preserved on `get token Information Policy` failure from OAuth (External) device.|
+|RDAPI-24337|01261191|**Issue**: The "Access Token using Client Credentials" filter could not be saved when the "Do not generate a refresh token" option is selected. **Resolution**: The "Access Token using Client Credentials" filter can now be saved when the "Do not generate a refresh token" option is selected.|
 |RDAPI-21693||**Issue**: The Oracle OJDBC6 JDBC driver used by API Gateway and Policy Studio is out of date. **Resolution**: The Oracle JDBC driver used by API Gateway and Policy Studio is upgraded to OJDBC8.|
 
 ## Known issues
