@@ -133,7 +133,7 @@ As part of our software development life cycle we constantly review our API Mana
 
 ### Antivirus filters
 
-In the [January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) update, we announced the deprecation of all the Antivirus filters in API Gateway. This is a reminder that in July 2021 we will remove the Antivirus filters from API Gateway. So, we recommend you to use the API Gateway's ICAP capability, which allows the gateway to integrate with ICAP capable external virus scanners.
+In the [January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) update, we announced the deprecation of all the Antivirus filters in API Gateway. This is a reminder that in August 2021 we will remove the Antivirus filters from API Gateway. So, we recommend you to use the API Gateway's ICAP capability, which allows the gateway to integrate with ICAP capable external virus scanners.
 
 ### Packet Sniffing
 
@@ -292,7 +292,7 @@ The following are known issues for this update.
 | RDAPI-23820 | Memory leak in customer environment                                                                                                                                |
 | RDAPI-23829 | API gateway and Portal duplicates the base url in the API catalog.                                                                                                 |
 | RDAPI-23841 | Deleting an Org in API Manager always throws error/exception in trace                                                                                              |
-| RDAPI-23853 | Slow API Manager jul20 GUI due to large authorization table                                                                                                        |
+| RDAPI-23853 | Slow API Manager GUI due to large authorization table                                                                                                              |
 | RDAPI-23866 | Try-It example for SOAP request missing namespaces                                                                                                                 |
 | RDAPI-23913 | Analytics PDF reports missing line item results that show on UI                                                                                                    |
 | RDAPI-23946 | Cassandra 2.2.x EOL 30th April 2021                                                                                                                                |
